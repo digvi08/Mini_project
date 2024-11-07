@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Quality Detection</title>
+    <link rel="stylesheet" href="static/new.css">
+</head>
+<body>
+    <div class="title-container">
+        <h1>Fruit Quality Detection</h1>
+    </div>
+
+    <div class="input-container">
+        <div class="input-title">
+            <h3>Upload Fruit Image :</h3>
+        </div>
+        <div class="file-input">
+            <input type="file" id="imageInput" accept="image/*" required>
+        </div>
+        <button id="uploadBtn">Predict Quality</button>
+    </div>
+
+    <div class="output-container" id="output-container">
+        <div class="output">
+            <div id="result">
+                <b>Result =></b> <span id="resultText">No result yet</span>
+            </div>
+            <div class="skill">
+                <div class="outer">
+                    <div class="inner">
+                     <div id="number">
+                        <div id="percentageText"><b>0%</b></div>
+                     </div>   
+                    </div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+                    <defs>
+                       <linearGradient id="GradientColor">
+                          <stop offset="0%" stop-color="#e91e63" />
+                          <stop offset="100%" stop-color="#673ab7" />
+                       </linearGradient>
+                    </defs>
+                    <circle cx="80" cy="80" r="70" stroke-linecap="round" />
+            </svg>
+            <div id="quality">Fruit Quality (%)</div>     
+            </div>
+
+    <script>  
+       document.getElementById('uploadBtn').addEventListener('click', async () => {
+    const fileInput = document.getElementById('imageInput');
+    if (fileInput.files.length === 0) {
+        alert('Please select an image file.');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+
+    const response = await fetch('/predict/', {
+        method: 'POST',
+        body: formData,
+    });
+
+    const result = await response.json();
+
+    document.getElementById('resultText').innerText = `Quality : ${result.quality}`;
+    let targetPercentage = Math.round(result.percentage);
+    animateProgressBar(targetPercentage);
+});
+
+function animateProgressBar(targetPercentage) {
+    let currentPercentage = 0;
+    const interval = setInterval(() => {
+        if (currentPercentage < targetPercentage) {
+            currentPercentage++;
+            updateProgressBar(currentPercentage);
+        } else {
+            clearInterval(interval);
+        }
+    }, 10); // Adjust this value to control the speed of the animation
+}
+
+function updateProgressBar(percentage) {
+    const circle = document.querySelector('circle');
+    const radius = circle.r.baseVal.value;
+    const circumference = 2 * Math.PI * radius;
+    const offset = circumference - (percentage / 100) * circumference;
+
+    circle.style.strokeDasharray = `${circumference}`;
+    circle.style.strokeDashoffset = offset;
+
+    document.getElementById('number').innerText = `${percentage}%`;
+}
+
+    </script>
+</body>
+</html>
+
