@@ -52,7 +52,7 @@ body::before {
     max-width: 600px;
     margin: 40px auto;
     padding: 20px;
-    background-color: #eaeaea;
+    background-color: #eaeaea;          
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -63,15 +63,16 @@ body::before {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
-
+/* #eaeaea */
 .input-title {
     height: 40px;
     width: 190px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #81b29a;
-    background-color: #81b29a;
+    border: 1px solid #6699cc;
+    background-color: #6699cc;
+    color: #fff275;
     border-radius: 2rem;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
@@ -80,7 +81,8 @@ body::before {
 #imageInput {
     height: 40px;
     width: 170px;
-    background-color: #81b29a;
+    background-color: #6699cc;
+    color: #fff275;
     padding: 10px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     border-radius: 2rem;
@@ -99,8 +101,10 @@ body::before {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .file-input:hover {
-    background-color: #6699cc;
-    color: #fff275;
+    background-color: #ff8c42;
+}
+#imageInput:hover{
+    color: #a23e48;
 }
 
 #uploadBtn {
@@ -108,10 +112,10 @@ body::before {
     justify-content: center;
     align-items: center;
     padding: 10px;
-    border: 1px solid #81b29a;
+    border: 1px solid #6699cc;
     border-radius: 20px;
-    background-color: #81b29a;
-    color: #2f4858;
+    background-color: #6699cc;
+    color: #fff275;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
     height: 40px;
@@ -122,8 +126,16 @@ body::before {
 }
 
 #uploadBtn:hover {
-    background-color: #6699cc;
-    color: #fff275;
+    color: #a23e48;
+    transform: scale(1.03);
+
+
+}
+#uploadBtn:active { 
+    transform: scale(0.97); 
+    /* Scaling button to 0.98 to its original size */ 
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    /* Lowering the shadow */ 
 }
 
 .output-container {
@@ -237,9 +249,3 @@ svg {
     font-size: medium;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
  }
-#quality:hover {
-    transform: translateY(-1px);
-    transform: translateX(-1px);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-    
-}
